@@ -1,0 +1,575 @@
+***** NO RANDOM EFFECTS *****
+=== OTT ===
+============================================================
+Component: sg_ott
+============================================================
+  69,965 pairs across 674 players.
+  curr_resid: mean=+0.001, std=1.031
+  Empirical Pearson corr(prev, curr): +0.0811
+
+  Fitting Model A (independence)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.96        3            793.40 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.65        1            813.06 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.60        3            728.05 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.97        3            747.98 draws/s   0:00:02   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 3 seconds.
+  Model A: 4.3s
+
+  Fitting Model B (hierarchical AR(1))...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.18        31           29.45 draws/s    0:01:07   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.17        31           29.35 draws/s    0:01:08   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.17        31           28.90 draws/s    0:01:09   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           28.93 draws/s    0:01:09   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 69 seconds.
+  Model B: 72.0s
+
+  Model B posterior summary:
+           mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd    ess_bulk   ess_tail   r_hat
+rho_pop  0.0859  0.0048  0.0770   0.0951     0.0001   0.0001   5637.6405  3483.3169  1.0007
+tau_rho  0.0563  0.0064  0.0449   0.0686     0.0002   0.0001   1515.0726  2403.2414  1.0000
+sigma    1.0258  0.0027  1.0209   1.0308     0.0000   0.0000  10020.7048  3051.4501  1.0015
+
+  LOO comparison:
+   rank       elpd_loo       p_loo   elpd_diff    weight          se        dse  warning scale
+B     0 -101137.503671  166.987103    0.000000  0.868526  258.298969   0.000000    False   log
+A     1 -101386.697558    1.793518  249.193887  0.131474  259.257991  27.404095    False   log
+
+=== APP ===
+============================================================
+Component: sg_app
+============================================================
+  69,965 pairs across 674 players.
+  curr_resid: mean=+0.009, std=1.596
+  Empirical Pearson corr(prev, curr): +0.0316
+
+  Fitting Model A (independence)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             1.15        3            630.71 draws/s   0:00:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.76        3            681.30 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.74        1            604.70 draws/s   0:00:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.77        3            667.51 draws/s   0:00:02   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 3 seconds.
+  Model A: 4.3s
+
+  Fitting Model B (hierarchical AR(1))...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.13        31           27.75 draws/s    0:01:12   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           27.62 draws/s    0:01:12   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.12        31           27.35 draws/s    0:01:13   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.13        31           27.50 draws/s    0:01:12   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 74 seconds.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details
+  Model B: 76.2s
+
+  Model B posterior summary:
+           mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop  0.0328  0.0040  0.0256   0.0405     0.0000   0.0001  7461.4728  3287.8311  0.9997
+tau_rho  0.0242  0.0094  0.0048   0.0407     0.0004   0.0002   748.6561   948.3055  1.0121
+sigma    1.5948  0.0042  1.5868   1.6021     0.0000   0.0001  9504.0732  2461.4554  1.0005
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff    weight          se       dse  warning scale
+B     0 -131956.585021  44.380037   0.000000  0.946572  207.313493  0.000000    False   log
+A     1 -131991.798586   1.249008  35.213565  0.053428  207.363213  8.888016    False   log
+
+=== ARG ===
+============================================================
+Component: sg_arg
+============================================================
+  69,965 pairs across 674 players.
+  curr_resid: mean=+0.005, std=1.090
+  Empirical Pearson corr(prev, curr): +0.0285
+
+  Fitting Model A (independence)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             1.06        7            654.66 draws/s   0:00:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.75        7            738.83 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.61        7            621.18 draws/s   0:00:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.73        1            709.81 draws/s   0:00:02   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 3 seconds.
+  Model A: 3.9s
+
+  Fitting Model B (hierarchical AR(1))...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.14        31           28.88 draws/s    0:01:09   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.13        31           28.00 draws/s    0:01:11   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.19        31           27.92 draws/s    0:01:11   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.17        31           28.07 draws/s    0:01:11   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 72 seconds.
+  Model B: 74.5s
+
+  Model B posterior summary:
+           mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop  0.0297  0.0040  0.0218   0.0368     0.0000   0.0001  7855.3296  3300.8177  1.0018
+tau_rho  0.0157  0.0091  0.0000   0.0303     0.0003   0.0001   749.5923  1235.2806  1.0069
+sigma    1.0894  0.0028  1.0842   1.0946     0.0000   0.0000  8768.7254  3200.9432  1.0012
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff    weight          se       dse  warning scale
+B     0 -105279.443935  24.391823   0.000000  0.920585  230.045509  0.000000    False   log
+A     1 -105306.019611   1.512462  26.575677  0.079415  230.034238  7.951725    False   log
+
+
+=== PUTT ===
+============================================================
+Component: sg_putt
+============================================================
+  69,965 pairs across 674 players.
+  curr_resid: mean=+0.012, std=1.688
+  Empirical Pearson corr(prev, curr): +0.0193
+
+  Fitting Model A (independence)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             1.00        1            738.72 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.76        3            755.94 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.74        1            666.75 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.77        3            742.32 draws/s   0:00:02   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 3 seconds.
+  Model A: 3.6s
+
+  Fitting Model B (hierarchical AR(1))...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.11        31           31.84 draws/s    0:01:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.22        31           31.59 draws/s    0:01:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           31.56 draws/s    0:01:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.11        31           31.06 draws/s    0:01:04   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 64 seconds.
+  Model B: 67.1s
+
+  Model B posterior summary:
+           mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop  0.0203  0.0040  0.0137   0.0286     0.0000   0.0001  6885.3266  3013.4279  0.9999
+tau_rho  0.0212  0.0096  0.0018   0.0367     0.0003   0.0002   771.3673  1131.3690  1.0000
+sigma    1.6877  0.0045  1.6795   1.6965     0.0001   0.0001  7072.1377  2738.4728  1.0048
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff   weight          se       dse  warning scale
+B     0 -135909.566365  36.021513   0.000000  0.92005  191.747167  0.000000    False   log
+A     1 -135922.731437   1.059398  13.165072  0.07995  191.735296  5.600981    False   log
+
+
+=== TOTAL ===
+============================================================
+Component: sg_total
+============================================================
+  90,990 pairs across 706 players.
+  curr_resid: mean=+0.019, std=2.763
+  Empirical Pearson corr(prev, curr): +0.0418
+
+  Fitting Model A (independence)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             1.03        1            638.59 draws/s   0:00:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.74        3            711.56 draws/s   0:00:02   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.69        3            631.77 draws/s   0:00:03   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.69        3            655.25 draws/s   0:00:03   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 3 seconds.
+  Model A: 5.3s
+
+  Fitting Model B (hierarchical AR(1))...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.18        31           26.10 draws/s    0:01:16   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.19        31           24.86 draws/s    0:01:20   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.19        31           25.50 draws/s    0:01:18   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           24.81 draws/s    0:01:20   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 81 seconds.
+  Model B: 84.0s
+
+  Model B posterior summary:
+           mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd    ess_bulk   ess_tail   r_hat
+rho_pop  0.0449  0.0038  0.0382   0.0522     0.0000   0.0001   6624.9525  3327.9843  1.0006
+tau_rho  0.0354  0.0065  0.0233   0.0475     0.0002   0.0001   1371.7234  2095.4029  1.0036
+sigma    2.7587  0.0064  2.7472   2.7714     0.0001   0.0001  11128.8054  2842.7089  1.0034
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff    weight          se        dse  warning scale
+B     0 -221487.593915  93.967587   0.000000  0.941403  229.957165   0.000000    False   log
+A     1 -221575.851960   1.189915  88.258045  0.058597  230.392661  14.200881    False   log
+
+All components done in 35.2 min.
+Posteriors saved to ./momentum_results/
+
+
+
+
+***** RANDOM EFFECTS ADDED *****
+=== OTT ===
+Loading momentum_residuals...
+  133,781 rounds in residual table.
+
+============================================================
+Component: sg_ott
+============================================================
+  69,965 pairs across 674 players and 33,091 (player, tournament) groups.
+  Cluster sizes: size 1: 13,590, size 2: 2,128, size 3: 17,373
+  curr_resid: mean=+0.001, std=1.031
+  Empirical Pearson corr(prev, curr): +0.0811
+
+  Fitting Model A (independence + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.47        3            108.70 draws/s   0:00:18   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.50        7            109.34 draws/s   0:00:18   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.50        7            110.07 draws/s   0:00:18   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.51        7            120.50 draws/s   0:00:16   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 18 seconds.
+  Model A: 23.7s
+
+  Fitting Model B (hierarchical AR(1) + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           12.74 draws/s    0:02:36   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.15        31           13.52 draws/s    0:02:27   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.13        31           13.35 draws/s    0:02:29   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           13.73 draws/s    0:02:25   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 157 seconds.
+  Model B: 163.6s
+
+  Model B posterior summary:
+             mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop    0.0798  0.0059  0.0687   0.0907     0.0001   0.0001  3133.9473  3260.3233  1.0009
+tau_rho    0.0568  0.0064  0.0447   0.0686     0.0002   0.0001  1498.4878  1996.7789  1.0018
+tau_gamma  0.1042  0.0347  0.0331   0.1635     0.0009   0.0007  1854.7438  1172.4658  1.0027
+sigma      1.0199  0.0042  1.0121   1.0278     0.0001   0.0001  2835.6849  2796.1830  1.0005
+
+  LOO comparison:
+   rank       elpd_loo       p_loo   elpd_diff    weight          se        dse  warning scale
+B     0 -101140.191420  176.617192    0.000000  0.769994  347.170918   0.000000    False   log
+A     1 -101263.706413    3.234114  123.514993  0.230006  347.984722  22.469929    False   log
+
+
+=== APP ===
+============================================================
+Component: sg_app
+============================================================
+  69,965 pairs across 674 players and 33,091 (player, tournament) groups.
+  Cluster sizes: size 1: 13,590, size 2: 2,128, size 3: 17,373
+  curr_resid: mean=+0.009, std=1.596
+  Empirical Pearson corr(prev, curr): +0.0316
+
+  Fitting Model A (independence + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.53        3            99.75 draws/s    0:00:20   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.55        7            96.43 draws/s    0:00:20   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.50        7            92.16 draws/s    0:00:21   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.56        9            102.89 draws/s   0:00:19   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 22 seconds.
+  Model A: 27.3s
+
+  Fitting Model B (hierarchical AR(1) + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           13.03 draws/s    0:02:33   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           12.92 draws/s    0:02:34   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.14        31           13.50 draws/s    0:02:28   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.17        31           13.51 draws/s    0:02:28   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 155 seconds.
+  Model B: 161.6s
+
+  Model B posterior summary:
+             mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop    0.0314  0.0044  0.0234   0.0397     0.0001   0.0001  4880.8934  3290.3321  0.9998
+tau_rho    0.0245  0.0095  0.0034   0.0401     0.0004   0.0003   558.8700   731.4954  1.0053
+tau_gamma  0.0711  0.0461  0.0000   0.1501     0.0010   0.0005  1845.4207  1771.6115  1.0011
+sigma      1.5927  0.0049  1.5835   1.6018     0.0001   0.0001  4512.0060  2942.5613  1.0010
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff    weight          se       dse  warning scale
+B     0 -131957.555865  47.025687   0.000000  0.909769  381.991562  0.000000    False   log
+A     1 -131977.849327   2.266300  20.293462  0.090231  381.962669  7.040786    False   log
+
+=== ARG ===
+============================================================
+Component: sg_arg
+============================================================
+  69,965 pairs across 674 players and 33,091 (player, tournament) groups.
+  Cluster sizes: size 1: 13,590, size 2: 2,128, size 3: 17,373
+  curr_resid: mean=+0.005, std=1.090
+  Empirical Pearson corr(prev, curr): +0.0285
+
+  Fitting Model A (independence + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.44        3            98.81 draws/s    0:00:20   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.51        3            99.86 draws/s    0:00:20   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.54        7            94.44 draws/s    0:00:21   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.53        5            93.69 draws/s    0:00:21   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 21 seconds.
+  Model A: 25.7s
+
+  Fitting Model B (hierarchical AR(1) + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.15        31           12.73 draws/s    0:02:37   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.13        31           12.85 draws/s    0:02:35   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.14        31           13.06 draws/s    0:02:33   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.10        31           12.50 draws/s    0:02:39   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 160 seconds.
+  Model B: 166.7s
+
+  Model B posterior summary:
+             mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop    0.0271  0.0046  0.0186   0.0360     0.0001   0.0001  3575.1435  2811.0093  1.0017
+tau_rho    0.0151  0.0091  0.0000   0.0298     0.0004   0.0001   438.9955  1122.8570  1.0028
+tau_gamma  0.0651  0.0361  0.0002   0.1222     0.0009   0.0004  1334.5298  1378.2581  1.0021
+sigma      1.0869  0.0037  1.0796   1.0936     0.0001   0.0001  3374.2228  2856.0810  0.9999
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff    weight          se       dse  warning scale
+B     0 -105280.000371  24.549617   0.000000  0.856179  342.354583  0.000000    False   log
+A     1 -105292.141808   2.618706  12.141437  0.143821  342.349502  5.839259    False   log
+
+=== PUTT ===
+============================================================
+Component: sg_putt
+============================================================
+  69,965 pairs across 674 players and 33,091 (player, tournament) groups.
+  Cluster sizes: size 1: 13,590, size 2: 2,128, size 3: 17,373
+  curr_resid: mean=+0.012, std=1.688
+  Empirical Pearson corr(prev, curr): +0.0193
+
+  Fitting Model A (independence + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.50        1            81.70 draws/s    0:00:24   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.42        3            84.91 draws/s    0:00:23   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.43        3            83.08 draws/s    0:00:24   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.44        7            83.42 draws/s    0:00:23   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 24 seconds.
+  Model A: 29.1s
+
+  Fitting Model B (hierarchical AR(1) + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.18        31           13.07 draws/s    0:02:32   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.14        31           13.14 draws/s    0:02:32   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.10        31           13.40 draws/s    0:02:29   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.14        31           13.64 draws/s    0:02:26   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 153 seconds.
+  Model B: 160.3s
+
+  Model B posterior summary:
+             mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop    0.0177  0.0047  0.0090   0.0267     0.0001   0.0001  2400.4363  2772.6919  0.9999
+tau_rho    0.0215  0.0097  0.0014   0.0367     0.0005   0.0002   463.1684   692.0321  1.0035
+tau_gamma  0.1021  0.0566  0.0005   0.1894     0.0017   0.0008  1022.3501  1047.8447  1.0027
+sigma      1.6836  0.0056  1.6728   1.6937     0.0001   0.0001  2835.8290  3025.5647  1.0002
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff    weight          se       dse  warning scale
+B     0 -135910.118186  38.097121    0.00000  0.797283  383.488486  0.000000    False   log
+A     1 -135915.139656   2.164060    5.02147  0.202717  383.389589  4.110784    False   log
+
+=== TOTAL ===
+============================================================
+Component: sg_total
+============================================================
+  90,990 pairs across 706 players and 42,055 (player, tournament) groups.
+  Cluster sizes: size 1: 15,855, size 2: 3,465, size 3: 22,735
+  curr_resid: mean=+0.019, std=2.763
+  Empirical Pearson corr(prev, curr): +0.0418
+
+  Fitting Model A (independence + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.39        1            65.05 draws/s    0:00:30   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.48        5            65.66 draws/s    0:00:30   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.52        3            66.26 draws/s    0:00:30   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.41        7            63.96 draws/s    0:00:31   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 31 seconds.
+  Model A: 37.1s
+
+  Fitting Model B (hierarchical AR(1) + marginalized PT random effect)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z, tau_gamma]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.15        31           10.44 draws/s    0:03:11   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.17        31           10.67 draws/s    0:03:07   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.19        31           10.84 draws/s    0:03:04   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.16        31           10.92 draws/s    0:03:03   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 191 seconds.
+  Model B: 199.6s
+
+  Model B posterior summary:
+             mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd   ess_bulk   ess_tail   r_hat
+rho_pop    0.0445  0.0039  0.0369   0.0516     0.0000   0.0001  6320.5740  3419.1097  1.0004
+tau_rho    0.0352  0.0071  0.0216   0.0481     0.0003   0.0003   843.5542   883.0883  1.0089
+tau_gamma  0.0494  0.0373  0.0000   0.1162     0.0006   0.0006  2944.7022  2169.2708  1.0008
+sigma      2.7580  0.0064  2.7468   2.7707     0.0001   0.0001  9493.3053  2845.0414  0.9998
+
+  LOO comparison:
+   rank       elpd_loo      p_loo  elpd_diff    weight          se        dse  warning scale
+B     0 -221488.949110  94.935515   0.000000  0.998224  506.879979   0.000000    False   log
+A     1 -221564.526604   2.126711  75.577494  0.001776  506.872275  12.358308    False   log
+
+
+
+***** BROKEN VERSION BEFORE MARGINALIZING *****
+Loading momentum_residuals...
+  133,781 rounds in residual table.
+
+============================================================
+Component: sg_ott
+============================================================
+  69,965 pairs across 674 players and 33,091 (player, tournament) groups.
+  curr_resid: mean=+0.001, std=1.031
+  Empirical Pearson corr(prev, curr): +0.0811
+
+  Fitting Model A (independence + player-tournament RE)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, tau_gamma, gamma_raw]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.06        63           11.36 draws/s    0:02:55   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.07        63           12.81 draws/s    0:02:36   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.08        63           11.82 draws/s    0:02:49   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.06        63           13.58 draws/s    0:02:27   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 176 seconds.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details
+  Model A: 235.6s
+
+  Fitting Model B (hierarchical AR(1) + player-tournament RE)...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, rho_pop, tau_rho, z, tau_gamma, gamma_raw]
+                                                                                                                                  
+  Progress                                   Draws   Divergences   Step size   Grad evals   Sampling Speed   Elapsed   Remaining  
+ ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.07        63           8.28 draws/s     0:04:01   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.04        63           7.72 draws/s     0:04:19   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    345           0.07        10           9.07 draws/s     0:03:40   0:00:00    
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   2000    0             0.08        63           8.50 draws/s     0:03:55   0:00:00    
+                                                                                                                                  
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 259 seconds.
+There were 345 divergences after tuning. Increase `target_accept` or reparameterize.
+The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details
+The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details
+  Model B: 328.6s
+
+  Model B posterior summary:
+             mean      sd  hdi_3%  hdi_97%  mcse_mean  mcse_sd  ess_bulk   ess_tail   r_hat
+rho_pop    0.0804  0.0059  0.0692   0.0906     0.0006   0.0002  105.9606   193.9483  1.0317
+tau_rho    0.0564  0.0064  0.0440   0.0680     0.0002   0.0001  984.6617  1658.0071  1.0022
+tau_gamma  0.0965  0.0327  0.0293   0.1479     0.0042   0.0022   61.9770   123.3460  1.0541
+sigma      1.0206  0.0040  1.0129   1.0275     0.0004   0.0001   83.8905   249.1613  1.0410
+
+  LOO comparison:
+/opt/anaconda3/envs/golf-pymc/lib/python3.11/site-packages/arviz/stats/stats.py:782: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
+  warnings.warn(
+   rank       elpd_loo        p_loo  elpd_diff    weight          se        dse  warning scale
+B     0 -101135.497139   845.149772    0.00000  0.491349  258.621147   0.000000    False   log
+A     1 -101146.308658  4634.019973   10.81152  0.508651  259.997113  26.390681     True   log

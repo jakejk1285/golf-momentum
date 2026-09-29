@@ -1,0 +1,7 @@
+*.db
+*.nc
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.env
+.venv/
