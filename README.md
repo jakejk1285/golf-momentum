@@ -1,100 +1,138 @@
-# Is Golf a Momentum Sport?
+# Golf Momentum
 
-**A Bayesian test of whether a good round predicts the next one, within the same tournament.**
+**Does a good round carry into the next one? A Bayesian hierarchical AR(1) test on ~134K professional rounds.**
 
 Jake Kostoryz · Isaiah Nick
 
 ---
 
-Golf commentary runs on momentum. A player "finds his rhythm," "rides the wave," gets
-"hot." Whether that language describes anything real, once you account for how good the
-player already is and how the course played that day, is an open question. This project
-answers it for the narrowest, cleanest case: **do consecutive rounds within a single
-tournament actually persist?**
+Every golf broadcast leans on the idea of momentum: a player gets hot, finds a rhythm,
+rides a good Friday into the weekend. We wanted to know whether any of that survives
+contact with the data once you control for two things that look like momentum but aren't:
+how good the player already is, and how hard the course played that day.
 
-The motivation is practical. The larger goal is a live, in-tournament model that updates
-a player's win probability as rounds come in. That model only needs round-to-round
-momentum in its structure if the momentum is real. So we tested for it first.
+We asked the narrowest version of the question we could actually answer. Within a single
+tournament, does a player's residual performance in round *r* predict round *r+1*?
 
-## The result in one picture
+The answer feeds a bigger project: a live win-probability model that updates as rounds
+are posted. If rounds are independent, that model can treat them as independent draws. If
+they persist, it needs a Markov structure. We had to settle that before building anything.
 
-Momentum exists, it is small, and it **decays toward the hole**. Driving is the most persistent part of the game round-to-round; putting is the least. 
-The skill most invoked in broadcast momentum talk is the one with the weakest evidence behind it.
+## The short version
 
-![Posterior of within-tournament persistence for total strokes gained, sitting well clear of zero](momentum_results_re/plots/posterior_rho_pop_sg_total.png)
+Yes, rounds persist, but the effect is small and it shrinks as you get closer to the hole.
+Driving carries over the most; putting carries over the least. The part of the game
+announcers talk about most when they say "hot" is the part with the least evidence.
 
-| Component | Persistence (ρ) | Verdict |
+![Posterior for population-level persistence in total strokes gained](momentum_results_re/plots/posterior_rho_pop_sg_total.png)
+
+| Component | ρ (posterior mean) | 94% HDI |
 |---|---|---|
-| Off-the-Tee | 0.080 | Strongest |
-| Total | 0.045 | |
-| Approach | 0.031 | |
-| Around-the-Green | 0.027 | |
-| Putting | 0.018 | Weakest |
+| Off-the-Tee | 0.080 | [0.069, 0.091] |
+| Total | 0.045 | [0.037, 0.052] |
+| Approach | 0.031 | [0.023, 0.040] |
+| Around-the-Green | 0.027 | [0.019, 0.036] |
+| Putting | 0.018 | [0.009, 0.027] |
 
-A persistence of 0.08 means about 8% of a good (or bad) round off-the-tee carries into
-the next. Real, but modest against the round-to-round noise.
+Read ρ = 0.08 as: roughly 8% of an above- or below-average driving round shows up again
+the next day. Every interval clears zero, and the ordering is consistent across models,
+priors and checks. The AR(1) model beats the independence model on out-of-sample fit
+(PSIS-LOO) for every component.
 
-## How we got there
+## Method
 
-**Strip out what isn't momentum.** Raw strokes gained is measured against each round's
-field, so it mixes a player's own performance with how strong that week's field was and
-how the course played. Before testing anything, we removed both: a walk-forward ridge
-regression estimates each player's skill as of the Monday before the event and each
-round's difficulty, and we work with what's left over. That residual is performance with
-skill and conditions already subtracted, which is the only thing momentum could live in.
+### 1. Remove skill and course conditions first
 
-**Set up a fair fight.** Two models, one per strokes-gained component. The null says each
-round is an independent draw. The alternative says each round is a partial echo of the
-one before, through a persistence parameter that is partially pooled across players. We
-let the data pick the winner via out-of-sample fit (PSIS-LOO).
+Strokes gained is measured against the field, so a raw number blends the player's own
+performance with the strength of that week's field and how the course set up. Neither is
+momentum. `adjusted_sg.py` fits a walk-forward ridge regression that estimates each
+player's skill as of the Monday before the event, plus a difficulty term for every round.
+`build_residuals.py` subtracts both and keeps the leftover. Everything downstream runs on
+that residual.
 
-**Kill the obvious objection.** A first pass found momentum everywhere, but any effect
-that sits at the tournament level (the course suiting a player, a good weather draw, a
-stale skill estimate) shifts all four of their rounds together, and the model would read
-that shared shift as momentum. We added a per-player-per-tournament control to absorb it.
+### 2. Compare two models per component
 
-**Fix the model that broke.** Adding that control directly meant sampling 33,000+ latent
-values, which collapsed the sampler into a funnel: chains stalling, divergences, a useless
-posterior. The fix was to integrate those values out analytically, since a sum of
-Gaussians is still Gaussian, they fold cleanly into the likelihood's covariance. Same
-model, same control, but now it converges in a few minutes with no pathologies.
+- **Model A (independence).** Each residual round is an iid draw.
+- **Model B (AR(1)).** Each round is a partial echo of the previous one, with a
+  player-specific persistence ρ_p that is partially pooled toward a population value
+  ρ_pop.
 
-![Sampler before and after: the funnel resolves once the random effect is marginalized](momentum_results_re/plots/trace_sg_ott_tau_gamma.png)
+Both are fit in PyMC, and the winner is picked by PSIS-LOO rather than by eyeballing
+posteriors.
 
-**Confirm it survives.** With the control in, persistence dropped by at most 10% and the
-ordering held. A posterior predictive check reproduced the observed lag-1 correlation
-(0.081 observed, 0.079 simulated), and the result was unchanged across a range of priors.
-The momentum is not an artifact of course fit or field strength.
+### 3. Control for the tournament itself
 
-![Persistence barely moves when the player-tournament control is added](momentum_results_re/plots/compare_rho_pop_with_without_re.png)
+The first pass (`momentum_pymc.py`) found persistence everywhere, which was suspicious.
+Anything constant across a player's four rounds in one week (a course that suits them, a
+favorable weather draw, a skill estimate that's slightly stale) shifts all four rounds
+together, and an AR(1) model will happily read that shared shift as momentum. So we added
+a per-player-per-tournament random effect γ to absorb it.
 
-## Where this goes next
+### 4. Fix the sampler
 
-The verdict is that a Markov structure is justified: the live win-probability model
-should carry round-to-round persistence rather than treating rounds as independent.
+Sampling γ directly (`momentum_pymc_explicit_gamma.py`) means ~33,000 extra latent
+parameters and a textbook funnel: divergences, stalled chains, ESS in the double digits.
+Since γ is Gaussian and enters additively, it can be integrated out in closed form. Within
+each (player, tournament) cluster the likelihood becomes a multivariate normal with
+compound-symmetric covariance σ²I + τ_γ²J. `momentum_pymc_re.py` implements that
+marginalized model. Same posterior on the parameters we care about, no funnel, converges
+in a few minutes with R-hat ≈ 1.00.
 
-Two known limitations point the way forward. The player-skill and round-difficulty inputs
-are currently point estimates, so their uncertainty does not flow into the final result;
-propagating it fully would tighten the honesty of the intervals. And the Gaussian
-likelihood understates the tails, real golf produces about three times as many blow-up
-rounds as it expects, so a heavier-tailed (Student-t) likelihood is the natural next step.
-Neither changes the momentum estimate, but both matter for a model that has to price
-extreme outcomes.
+![Trace for τ_γ before and after marginalizing the random effect](momentum_results_re/plots/trace_sg_ott_tau_gamma.png)
 
-## Repo contents
+### 5. Check that it holds up
 
-| File | Role |
+- With the tournament control in place, ρ dropped by at most ~10% and the component
+  ordering did not change.
+- A posterior predictive check (`ppc.py`) reproduces the observed lag-1 autocorrelation:
+  0.081 observed vs 0.079 simulated for off-the-tee.
+- Prior sensitivity (`prior_sensitivity.py`) shows the estimate is stable across a range
+  of priors on ρ_pop and τ_ρ.
+
+![ρ_pop with and without the player-tournament random effect](momentum_results_re/plots/compare_rho_pop_with_without_re.png)
+
+## What we'd do next
+
+The win-probability model should carry round-to-round persistence. That's the decision
+this analysis was meant to inform.
+
+Two limitations are worth fixing before that model prices anything:
+
+1. **Uncertainty in the inputs.** Player skill and round difficulty enter as point
+   estimates, so their uncertainty doesn't propagate into the ρ intervals. A joint model
+   would make the intervals more honest.
+2. **Tails.** The Gaussian likelihood underestimates blow-up rounds by about a factor of
+   three. A Student-t likelihood is the obvious replacement. It shouldn't move ρ much, but
+   it matters for anything that has to price extreme outcomes.
+
+## Repository layout
+
+| Path | What it does |
 |---|---|
-| `adjusted_sg.py` | Ridge regression for player skill and round difficulty |
-| `build_residuals.py` | Builds the residual dataset the momentum test runs on |
-| `momentum_pymc.py` | Independence vs AR(1), first pass |
-| `momentum_pymc_re.py` | Same test with the marginalized tournament control (headline result) |
-| `momentum_pymc_explicit_gamma.py` | The unmarginalized version, kept to document the funnel |
-| `ppc.py` | Posterior predictive check |
-| `prior_sensitivity.py` | Robustness of the result to prior choices |
-| `plot_diagnostics.py` | All figures |
+| `adjusted_sg.py` | Walk-forward ridge regression for player skill and round difficulty |
+| `build_residuals.py` | Builds the residual dataset the momentum models run on |
+| `momentum_pymc.py` | Model A vs Model B, no tournament control (first pass) |
+| `momentum_pymc_re.py` | Model A vs Model B with the marginalized player-tournament effect (headline result) |
+| `momentum_pymc_explicit_gamma.py` | Same model with γ sampled explicitly; kept to document the funnel |
+| `ppc.py` | Posterior predictive check on lag-1 autocorrelation |
+| `prior_sensitivity.py` | Re-fits under alternative priors |
+| `plot_diagnostics.py` | Generates every figure in the `momentum_results*` folders |
+| `results.txt` | Full sampler output and LOO tables for every run |
+| `momentum_results/` | Plots from the first pass |
+| `momentum_results_re/` | Plots from the headline (marginalized) model |
+| `momentum_results_explicit_gamma/` | Plots from the unmarginalized model |
+| `momentum_results_ppc/` | Posterior predictive check plots |
+| `report/momentum_presentation.pdf` | Slide deck |
 
-Data is from the DataGolf API (PGA Tour and LIV, 2019-2026, ~134K rounds). The source
-database is not included.
+## Data
 
-**Full slide deck:** [`report/momentum_presentation.pdf`](report/momentum_presentation.pdf)
+Round-level strokes gained from the DataGolf API, covering the PGA Tour and LIV from 2019
+through 2026 (~134K rounds, ~70K consecutive-round pairs per component, 674 players). The
+source database is not included in this repo.
+
+## Running it
+
+Requires Python 3.10+ with `pymc`, `arviz`, `numpy`, `pandas`, `scipy`, `scikit-learn` and
+`matplotlib`. With the database in place, run the scripts in the order listed above:
+`adjusted_sg.py` → `build_residuals.py` → a `momentum_pymc*.py` model → `ppc.py` /
+`prior_sensitivity.py` → `plot_diagnostics.py`.
